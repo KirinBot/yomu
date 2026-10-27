@@ -1,0 +1,61 @@
+title: となりの へや
+title_en: The Room Next Door
+level: 0
+emoji: 🚪
+hook: A small apartment by a train station in Tokyo. A woman lives there alone. Every night, through the thin wall, she hears something.
+tags: mystery, loneliness, twist
+pattern: te-imasu | 〜て います | is ~ing · ongoing state | Verb in て-form + います: something happening now, or a continuing state. ないて います = is crying. すんで います = lives (is living).
+pattern: masen | 〜ません | doesn't · isn't | The polite negative: ます becomes ません. あります (there is) → ありません (there isn't). しります → しりません (don't know).
+pattern: mashita | 〜ました | did (past) | The polite past: ます becomes ました. つくります → つくりました (made). Past negative: ませんでした.
+pattern: kara | 〜から | from | After a place: まどから = from the window, へやから = from the room.
+
+== よる | Night
+わたし=I は=(topic) ひとりで=alone;_by_myself すんで@すむ=live#te-imasu います@いる=(is_~ing)#te-imasu 。 || I live alone.
+へや=room は=(topic) ちいさい=small です=is 。 || My room is small.
+まど=window から=from#kara えき=station が=(subject) みえます@みえる=can_be_seen 。 || From the window, I can see the station.
+
+まいばん=every_night 、 わたし=I は=(topic) 十一時:じゅういちじ=eleven_o'clock に=at ねます@ねる=go_to_bed 。 || Every night, I go to bed at eleven.
+でも=but 、 ねられません@ねる=can't_sleep#masen 。 || But I can't sleep.
+となり=next_door の=(of) へや=room から=from#kara こえ=voice が=(subject) きこえます@きこえる=can_be_heard 。 || A voice comes from the room next door.
+だれか=someone が=(subject) ないて@なく=cry#te-imasu います@いる=(is_~ing)#te-imasu 。 || Someone is crying.
+ちいさい=small こえ=voice です=is 。 || It's a small voice.
+まいばん=every_night 、 おなじ=same じかん=time に=at 。 || Every night, at the same time.
+
+わたし=I は=(topic) かべ=wall を=(object) みます@みる=look 。 || I look at the wall.
+「 だいじょうぶ=okay;_all_right です=is か=(question) 。 」 || "Are you all right?"
+へんじ=reply は=(topic) ありません@ある=there_isn't#masen 。 || There is no reply.
+
+== おにぎり | Rice Balls
+あさ=morning 、 わたし=I は=(topic) となり=next_door の=(of) ドア=door を=(object) みます@みる=look 。 || In the morning, I look at the door next door.
+なまえ=name は=(topic) ありません@ある=there_isn't#masen 。 || There's no name.
+わたし=I は=(topic) となり=next_door の=(of) 人:ひと=person を=(object) しりません@しる=don't_know#masen 。 || I don't know the person next door.
+でも=but 、 まいばん=every_night ないて@なく=cry#te-imasu います@いる=(is_~ing)#te-imasu 。 || But every night, they're crying.
+
+わたし=I は=(topic) おにぎり=rice_ball を=(object) 三つ:みっつ=three_(things) つくりました@つくる=made#mashita 。 || I made three rice balls.
+そして=and_then 、 てがみ=letter を=(object) かきました@かく=wrote#mashita 。 || And I wrote a letter.
+「 たべて@たべる=eat ください=please 。 あなた=you は=(topic) ひとり=alone じゃ=(is) ありません@ある=(not)#masen 。 」 || "Please eat. You are not alone."
+おにぎり=rice_ball と=and てがみ=letter を=(object) ドア=door の=(of) まえ=front に=at おきました@おく=put#mashita 。 || I put the rice balls and the letter in front of the door.
+
+その=that よる=night 、 こえ=voice は=(topic) ありませんでした@ある=there_wasn't#mashita 。 || That night, there was no voice.
+つぎ=next の=(of) あさ=morning 、 ドア=door の=(of) まえ=front に=at なにも=nothing ありません@ある=there_isn't#masen 。 || The next morning, there is nothing in front of the door.
+おにぎり=rice_ball も=also 、 てがみ=letter も=also 、 ありません@ある=there_isn't#masen 。 || No rice balls. No letter.
+そして=and_then 、 わたし=my の=('s) ドア=door の=(of) まえ=front に=at 、 ちいさい=small かみ=paper が=(subject) あります@ある=there_is 。 || And in front of MY door, there's a small piece of paper.
+「 ありがとう=thank_you 。 」 || "Thank you."
+
+== おおやさん | The Landlady
+にちようび=Sunday 、 おおやさん=landlady に=(to) あいました@あう=met#mashita 。 || On Sunday, I met the landlady.
+「 となり=next_door の=(of) 人:ひと=person は=(topic) げんき=well;_healthy です=is か=(question) 。 」 と=(quote) ききました@きく=asked#mashita 。 || "Is the person next door doing well?" I asked.
+おおやさん=landlady は=(topic) わたし=me を=(object) みました@みる=looked#mashita 。 || The landlady looked at me.
+「 となり=next_door ？ となり=next_door の=(of) へや=room は=(topic) だれも=nobody いません@いる=isn't_there#masen よ=(you_know) 。 」 || "Next door? There's nobody in that room."
+「 一年:いちねん=one_year 、 だれも=nobody いません@いる=isn't_there#masen 。 」 || "Nobody, for a year."
+わたし=I は=(topic) なにも=nothing いえませんでした@いう=couldn't_say#mashita 。 || I couldn't say anything.
+
+「 でも=but …… あなた=you は=(topic) だいじょうぶ=okay ？ 」 || "But… are you okay?"
+「 まいばん=every_night 、 あなた=your の=('s) へや=room から=from#kara なく@なく=crying こえ=voice が=(subject) きこえます@きこえる=can_be_heard よ=(you_know) 。 」 || "Every night, I hear crying from your room."
+
+わたし=I は=(topic) へや=room に=to かえりました@かえる=went_back#mashita 。 || I went back to my room.
+わたし=I は=(topic) もう一度:もういちど=once_more ちいさい=small かみ=paper を=(object) みます@みる=look 。 || I look at the small piece of paper again.
+「 ありがとう=thank_you 。 」 || "Thank you."
+わたし=my の=('s) じ=handwriting です=is 。 || It's my handwriting.
+
+その=that よる=night 、 わたし=I は=(topic) はじめて=for_the_first_time よく=well ねました@ねる=slept#mashita 。 || That night, for the first time, I slept well.

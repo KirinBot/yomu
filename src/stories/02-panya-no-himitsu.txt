@@ -1,0 +1,58 @@
+title: パンやの ひみつ
+title_en: The Baker's Secret
+level: 0
+emoji: 🥐
+hook: A tiny bakery in an old part of town. Every morning, one loaf goes missing from the window. The baker could call the police. She doesn't.
+tags: drama, family, twist
+pattern: masen | 〜ません | doesn't · isn't | The polite negative: ます becomes ません. いいます (says) → いいません (doesn't say).
+pattern: mashita | 〜ました | did (past) | The polite past: ます becomes ました. おきます → おきました (put). Past negative: ませんでした (didn't).
+pattern: te-link | 〜て、… | does A, and (then) B | A verb in て-form joins two actions in order: とって、はしります = takes it and runs.
+pattern: te-imasu | 〜て います | is ~ing · ongoing state | て-form + います: みて います = is watching. Negative: すいて いません = isn't (hungry).
+
+== なくなる パン | The Missing Bread
+はなさん=Hana_(Ms.) は=(topic) パンや=baker;_bakery です=is 。 || Hana runs a bakery.
+ちいさい=small みせ=shop です=is 。 || It's a small shop.
+まいあさ=every_morning 四時:よじ=four_o'clock に=at パン=bread を=(object) やきます@やく=bake 。 || Every morning at four, she bakes bread.
+パン=bread を=(object) まど=window の=(of) そば=beside に=at おきます@おく=put 。 || She puts the bread by the window.
+
+でも=but 、 このごろ=lately 、 パン=bread が=(subject) 一つ:ひとつ=one なくなります@なくなる=go_missing 。 || But lately, one loaf goes missing.
+まいあさ=every_morning 、 一つ:ひとつ=one 。 || Every morning, one.
+「 だれ=who ？ 」 || "Who?"
+はなさん=Hana は=(topic) けいさつ=police に=to いいません@いう=doesn't_tell#masen 。 || Hana doesn't tell the police.
+「 あした=tomorrow 、 はやく=early おきて@おきる=get_up#te-link 、 みます@みる=watch 。 」 || "Tomorrow I'll get up early and watch."
+
+== おんなのこ | The Girl
+あさ=morning 三時:さんじ=three_o'clock 。 || Three in the morning.
+はなさん=Hana は=(topic) くらい=dark みせ=shop の=(of) 中:なか=inside に=in います@いる=is_(there) 。 || Hana is inside the dark shop.
+まど=window が=(subject) しずかに=quietly あきます@あく=opens 。 || The window opens quietly.
+ちいさい=small 手:て=hand 。 || A small hand.
+女の子:おんなのこ=girl です=is 。 十:じゅっ=ten さい=years_old ぐらい=about です=is 。 || It's a girl. About ten years old.
+女の子:おんなのこ=girl は=(topic) パン=bread を=(object) 一つ:ひとつ=one とって@とる=take#te-link 、 はしります@はしる=runs 。 || The girl takes one loaf and runs.
+はなさん=Hana は=(topic) なにも=nothing いいませんでした@いう=didn't_say#mashita 。 || Hana said nothing.
+
+つぎ=next の=(of) 日:ひ=day 、 はなさん=Hana は=(topic) パン=bread を=(object) 二つ:ふたつ=two おきました@おく=put#mashita 。 || The next day, Hana put out two loaves.
+女の子:おんなのこ=girl は=(topic) 二つ:ふたつ=two とりました@とる=took#mashita 。 || The girl took two.
+はなさん=Hana は=(topic) すこし=a_little わらいました@わらう=smiled#mashita 。 || Hana smiled a little.
+
+でも=but 、 ある=one_(certain) あさ=morning 、 女の子:おんなのこ=girl は=(topic) きませんでした@くる=didn't_come#mashita 。 || But one morning, the girl didn't come.
+つぎ=next の=(of) 日:ひ=day も=also 、 きませんでした@くる=didn't_come#mashita 。 || The next day, she didn't come either.
+パン=bread は=(topic) まど=window の=(of) そば=beside で=at つめたく@つめたい=cold なりました@なる=became#mashita 。 || The bread went cold by the window.
+
+== こうえん | The Park
+わたし=my の=('s) なまえ=name は=(topic) ゆい=Yui です=is 。 || My name is Yui.
+わたし=I は=(topic) おなか=stomach が=(subject) すいて@すく=be_empty#te-imasu いません@いる=(isn't_~ing)#te-imasu 。 || I'm not hungry.
+パン=bread は=(topic) わたし=me の=(for) じゃ=(is) ありません@ある=(not)#masen 。 || The bread isn't for me.
+
+こうえん=park に=in おじいさん=old_man が=(subject) います@いる=there_is 。 || There's an old man in the park.
+おじいさん=old_man は=(topic) いえ=home が=(subject) ありません@ある=doesn't_have#masen 。 || The old man has no home.
+おじいさん=old_man は=(topic) まいにち=every_day パンや=bakery を=(object) みて@みる=watch#te-imasu います@いる=(is_~ing)#te-imasu 。 || Every day, he watches the bakery.
+でも=but 、 みせ=shop に=into はいりません@はいる=doesn't_go_in#masen 。 || But he never goes inside.
+
+「 どうして=why ？ 」 と=(quote) わたし=I は=(topic) ききました@きく=asked#mashita 。 || "Why?" I asked.
+「 あの=that パンや=bakery は=(topic) わたし=my の=('s) むすめ=daughter の=('s) みせ=shop だ=is_(plain) 。 」 || "That bakery is my daughter's shop."
+「 二十年:にじゅうねん=twenty_years 、 あって@あう=meet いない@いる=haven't_(plain) 。 」 || "I haven't seen her in twenty years."
+「 わたし=I は=(topic) わるい=bad ちちおや=father だった@だ=was_(plain) 。 」 || "I was a bad father."
+
+先週:せんしゅう=last_week 、 おじいさん=old_man は=(topic) びょういん=hospital に=to いきました@いく=went#mashita 。 || Last week, the old man went into hospital.
+きょう=today 、 わたし=I は=(topic) パンや=bakery の=(of) ドア=door を=(object) あけます@あける=open 。 || Today, I open the bakery's door.
+まど=window から=from じゃ=(is) ありません@ある=(not)#masen 。 || Not through the window.
