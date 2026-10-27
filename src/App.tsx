@@ -8,6 +8,7 @@ import { Kana } from "./components/Kana";
 import { Settings } from "./components/Settings";
 import { Generate } from "./components/Generate";
 import { Method, Onboarding } from "./components/Onboarding";
+import { onTtsProblem } from "./lib/tts";
 
 export const navigate = (path: string) => {
   window.location.hash = path;
@@ -44,7 +45,12 @@ export function App() {
 
   if (section === "read" && a) {
     const story = findStory(a);
-    return story ? <Reader story={story} ch={Number(b) || 0} /> : <NotFound />;
+    return (
+      <>
+        {story ? <Reader story={story} ch={Number(b) || 0} /> : <NotFound />}
+        <AudioNotice />
+      </>
+    );
   }
 
   let screen;
@@ -91,8 +97,25 @@ export function App() {
           </a>
         ))}
       </nav>
+      <AudioNotice />
     </div>
   );
+}
+
+/** Explains silent audio instead of leaving the user guessing. */
+function AudioNotice() {
+  const [message, setMessage] = useState("");
+  useEffect(() => onTtsProblem(setMessage), []);
+  useEffect(() => {
+    if (!message) return;
+    const t = setTimeout(() => setMessage(""), 7000);
+    return () => clearTimeout(t);
+  }, [message]);
+  return message ? (
+    <div className="toast audio-notice" onClick={() => setMessage("")}>
+      {message}
+    </div>
+  ) : null;
 }
 
 function NotFound() {

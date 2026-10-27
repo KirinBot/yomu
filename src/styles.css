@@ -219,3 +219,4 @@ rt { font-size: 0.45em; color: var(--muted); font-family: var(--ui); }
 .grp { white-space: nowrap; }
 .text.with-sheet { padding-bottom: 340px; }
 .list .card { margin: 0; }
+.audio-notice { border-radius: 14px; bottom: calc(76px + env(safe-area-inset-bottom)); width: max-content; max-width: min(90vw, 440px); cursor: pointer; }
