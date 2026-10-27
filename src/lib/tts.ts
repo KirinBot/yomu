@@ -1,3 +1,4 @@
+import { AzureError, azureClip, azureEnabled } from "./azure";
 import { getState } from "./store";
 
 // Browser speech synthesis, Japanese voices only.
@@ -97,16 +98,13 @@ function restart(run: (gen: number) => void) {
   else run(gen);
 }
 
-export function speak(text: string, rate?: number) {
+function browserSpeak(text: string, rate?: number) {
   restart((gen) => say(utterance(text, rate), gen));
 }
 
-/**
- * Read sentences one at a time (long single utterances get cut off in some
- * browsers) and report which sentence is playing. Returns a stop function.
- */
-export function speakSequence(texts: string[], start: number, onIndex: (i: number | null) => void) {
-  if (!synth) return () => {};
+/** Browser voice, sentence by sentence (long single utterances get cut off in some browsers). */
+function browserSequence(texts: string[], start: number, onIndex: (i: number | null) => void) {
+  if (!synth) return;
   let gen = -1;
   const play = (i: number) => {
     if (gen !== generation) return;
@@ -126,8 +124,128 @@ export function speakSequence(texts: string[], start: number, onIndex: (i: numbe
     gen = g;
     play(start);
   });
+}
+
+// --- Azure neural voices --------------------------------------------------------
+
+// One audio element for everything: iOS only lets an element play after it has
+// been started once from a tap, and clips arrive after an async fetch.
+const audio = typeof Audio !== "undefined" ? new Audio() : undefined;
+let audioUnlocked = false;
+let clipUrl = "";
+let azureFailed = false; // a bad key or region: stop asking Azure until settings change
+
+export const resetAzureFailure = () => {
+  azureFailed = false;
+};
+const useAzure = () => !!audio && azureEnabled() && !azureFailed;
+
+/** A tenth of a second of silence, played on the first tap to unlock the element. */
+function silence() {
+  const samples = 2400;
+  const v = new DataView(new ArrayBuffer(44 + samples * 2));
+  const str = (o: number, t: string) => [...t].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0)));
+  str(0, "RIFF");
+  v.setUint32(4, 36 + samples * 2, true);
+  str(8, "WAVEfmt ");
+  v.setUint32(16, 16, true);
+  v.setUint16(20, 1, true);
+  v.setUint16(22, 1, true);
+  v.setUint32(24, 24000, true);
+  v.setUint32(28, 48000, true);
+  v.setUint16(32, 2, true);
+  v.setUint16(34, 16, true);
+  str(36, "data");
+  v.setUint32(40, samples * 2, true);
+  return URL.createObjectURL(new Blob([v.buffer], { type: "audio/wav" }));
+}
+
+function unlockAudio() {
+  if (!audio || audioUnlocked) return;
+  audioUnlocked = true;
+  audio.src = silence();
+  audio.play().catch((e: DOMException) => {
+    if (e.name === "NotAllowedError") audioUnlocked = false;
+  });
+}
+
+function playClip(blob: Blob) {
+  return new Promise<void>((resolve, reject) => {
+    if (!audio) return reject(new Error("no audio"));
+    if (clipUrl) URL.revokeObjectURL(clipUrl);
+    clipUrl = URL.createObjectURL(blob);
+    audio.onended = () => resolve();
+    audio.onerror = () => reject(new Error("playback"));
+    audio.src = clipUrl;
+    audio.play().catch(reject);
+  });
+}
+
+/** Report an Azure problem; returns false so callers fall back to the browser voice. */
+function azureProblem(e: unknown) {
+  if (e instanceof AzureError) {
+    if (e.fatal) azureFailed = true;
+    report(`${e.message} Using the built-in voice for now.`);
+  } else if (e instanceof DOMException && e.name === "NotAllowedError") {
+    audioUnlocked = false;
+    report("Tap play again to start the audio.");
+  } else report("Couldn't play the Azure audio. Using the built-in voice for now.");
+}
+
+async function azureSpeak(text: string, rate: number, gen: number) {
+  try {
+    const blob = await azureClip(text, rate);
+    if (gen === generation) await playClip(blob);
+  } catch (e) {
+    if (gen !== generation) return;
+    azureProblem(e);
+    if (!(e instanceof DOMException)) browserSpeak(text, rate);
+  }
+}
+
+async function azureSequence(texts: string[], start: number, onIndex: (i: number | null) => void, gen: number) {
+  const { rate } = getState().settings;
+  for (let i = start; i < texts.length; i++) {
+    if (gen !== generation) return;
+    onIndex(i);
+    try {
+      const blob = await azureClip(texts[i], rate);
+      if (gen !== generation) return;
+      if (i + 1 < texts.length) azureClip(texts[i + 1], rate).catch(() => {}); // fetch ahead
+      await playClip(blob);
+    } catch (e) {
+      if (gen !== generation) return;
+      azureProblem(e);
+      if (e instanceof DOMException) onIndex(null);
+      else browserSequence(texts, i, onIndex);
+      return;
+    }
+  }
+  if (gen === generation) onIndex(null);
+}
+
+// --- Public API -------------------------------------------------------------------
+
+export function speak(text: string, rate?: number) {
+  if (useAzure()) {
+    unlockAudio();
+    stopSpeaking();
+    azureSpeak(text, rate ?? getState().settings.rate, generation);
+  } else browserSpeak(text, rate);
+}
+
+let sequenceId = 0;
+
+/** Read sentences in order, reporting which one is playing. Returns a stop function. */
+export function speakSequence(texts: string[], start: number, onIndex: (i: number | null) => void) {
+  const id = ++sequenceId;
+  if (useAzure()) {
+    unlockAudio();
+    stopSpeaking();
+    azureSequence(texts, start, onIndex, generation);
+  } else browserSequence(texts, start, onIndex);
   return () => {
-    if (gen === generation || gen === -1) stopSpeaking();
+    if (id === sequenceId) stopSpeaking();
     onIndex(null);
   };
 }
@@ -135,6 +253,9 @@ export function speakSequence(texts: string[], start: number, onIndex: (i: numbe
 export const stopSpeaking = () => {
   generation++;
   held.length = 0;
-  synth?.cancel();
-  lastCancel = Date.now();
+  audio?.pause();
+  if (synth && (synth.speaking || synth.pending)) {
+    synth.cancel();
+    lastCancel = Date.now();
+  }
 };

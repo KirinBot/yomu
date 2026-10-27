@@ -25,6 +25,13 @@ read-along audio, and a preview → read → summarise → reread loop.
 - **Data** lives in the browser's localStorage (export/import a backup in Settings).
   The API key is stored there too and sent only to Anthropic.
 
+## Natural voices (optional)
+
+Settings → Audio takes an Azure AI Speech key and region. Sentences are then read by
+a neural voice (Nanami by default) instead of the device voice. Each clip is saved in
+IndexedDB (keyed by voice, speed and text), so rereads are free and work offline. If
+Azure fails (bad key, quota), Yomu says so and falls back to the built-in voice.
+
 ## Deploying (for phone use)
 
 Live at https://kirinbot.github.io/yomu/ (GitHub Pages, served from the `gh-pages` branch).

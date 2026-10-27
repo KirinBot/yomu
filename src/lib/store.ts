@@ -53,6 +53,9 @@ export interface State {
     fontSize: number;
     voiceURI: string;
     rate: number;
+    azureKey: string;
+    azureRegion: string;
+    azureVoice: string;
   };
   words: Record<string, WordInfo>;
   progress: Record<string, StoryProgress>;
@@ -81,6 +84,9 @@ const initial = (): State => ({
     fontSize: 24,
     voiceURI: "",
     rate: 0.8,
+    azureKey: "",
+    azureRegion: "",
+    azureVoice: "ja-JP-NanamiNeural",
   },
   words: {},
   progress: {},

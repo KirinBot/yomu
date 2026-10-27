@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
 import { LEVELS, MODELS } from "../lib/claude";
 import { getState, update, useStore, type Aid, type State } from "../lib/store";
-import { japaneseVoices, onVoicesChanged, speak } from "../lib/tts";
+import { AZURE_VOICES, clearSavedClips, savedClipCount } from "../lib/azure";
+import { japaneseVoices, onVoicesChanged, resetAzureFailure, speak } from "../lib/tts";
 
 export function Settings() {
   const settings = useStore((s) => s.settings);
   const profile = useStore((s) => s.profile);
   const [voices, setVoices] = useState(japaneseVoices);
   useEffect(() => onVoicesChanged(() => setVoices(japaneseVoices())), []);
+  const [clips, setClips] = useState(0);
+  useEffect(() => {
+    savedClipCount().then(setClips);
+  }, []);
 
   const set = <K extends keyof State["settings"]>(k: K, v: State["settings"][K]) =>
     update((s) => ({ ...s, settings: { ...s.settings, [k]: v } }));
+  const setAzure = <K extends "azureKey" | "azureRegion" | "azureVoice">(k: K, v: string) => {
+    resetAzureFailure();
+    set(k, v);
+  };
   const setProfile = <K extends keyof State["profile"]>(k: K, v: State["profile"][K]) =>
     update((s) => ({ ...s, profile: { ...s.profile, [k]: v } }));
 
@@ -97,14 +106,51 @@ export function Settings() {
 
       <section className="card">
         <h3>Audio</h3>
-        {voices.length === 0 ? (
+        <p className="muted small">
+          For a natural narrator, add a free Azure Speech key below. Without one, Yomu uses your device's built-in voice.
+        </p>
+        <label className="field">
+          <span>Azure Speech key</span>
+          <input
+            type="password"
+            value={settings.azureKey}
+            autoComplete="off"
+            onChange={(e) => setAzure("azureKey", e.target.value.trim())}
+          />
+        </label>
+        <label className="field">
+          <span>Azure region</span>
+          <input
+            value={settings.azureRegion}
+            placeholder="e.g. westeurope"
+            autoComplete="off"
+            autoCapitalize="off"
+            onChange={(e) => setAzure("azureRegion", e.target.value.trim())}
+          />
+          <span className="muted small">
+            Both are on your Speech resource's “Keys and Endpoint” page in the Azure portal. Stored only in this browser
+            and sent only to Azure.
+          </span>
+        </label>
+        {settings.azureKey && settings.azureRegion ? (
+          <label className="field">
+            <span>Natural voice</span>
+            <select value={settings.azureVoice} onChange={(e) => setAzure("azureVoice", e.target.value)}>
+              {AZURE_VOICES.map((v) => (
+                <option key={v.id} value={v.id}>
+                  {v.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        ) : voices.length === 0 ? (
           <p className="muted small">
             No Japanese voice found in this browser. On a Mac: System Settings → Accessibility → Spoken Content → System
             voice → Manage Voices → Japanese (Kyoko or O-ren). Then reload.
           </p>
         ) : (
           <label className="field">
-            <span>Voice</span>
+            <span>Built-in voice</span>
             <select value={settings.voiceURI} onChange={(e) => set("voiceURI", e.target.value)}>
               <option value="">Default Japanese voice</option>
               {voices.map((v) => (
@@ -129,6 +175,17 @@ export function Settings() {
         <button className="btn" onClick={() => speak("こんにちは。 きょうも すこし よみましょう。")}>
           🔊 Test voice
         </button>
+        {clips > 0 && (
+          <p className="muted small">
+            {clips} sentences of Azure audio saved on this device, so rereading costs nothing.{" "}
+            <button
+              className="link-btn"
+              onClick={() => clearSavedClips().then(() => setClips(0))}
+            >
+              Clear
+            </button>
+          </p>
+        )}
       </section>
 
       <section className="card">
