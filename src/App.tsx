@@ -9,6 +9,7 @@ import { Settings } from "./components/Settings";
 import { Generate } from "./components/Generate";
 import { Method, Onboarding } from "./components/Onboarding";
 import { onTtsProblem } from "./lib/tts";
+import { reloadFresh, useUpdateReady } from "./lib/update";
 
 export const navigate = (path: string) => {
   window.location.hash = path;
@@ -41,7 +42,13 @@ export function App() {
   const onboarded = useStore((s) => s.profile.onboarded);
   useStore((s) => s.generated); // re-render when stories are added
 
-  if (!onboarded) return <Onboarding />;
+  if (!onboarded)
+    return (
+      <>
+        <Onboarding />
+        <UpdateBar />
+      </>
+    );
 
   if (section === "read" && a) {
     const story = findStory(a);
@@ -49,6 +56,7 @@ export function App() {
       <>
         {story ? <Reader story={story} ch={Number(b) || 0} /> : <NotFound />}
         <AudioNotice />
+        <UpdateBar />
       </>
     );
   }
@@ -98,6 +106,7 @@ export function App() {
         ))}
       </nav>
       <AudioNotice />
+      <UpdateBar />
     </div>
   );
 }
@@ -115,6 +124,14 @@ function AudioNotice() {
     <div className="toast audio-notice" onClick={() => setMessage("")}>
       {message}
     </div>
+  ) : null;
+}
+
+function UpdateBar() {
+  return useUpdateReady() ? (
+    <button className="update-bar" onClick={reloadFresh}>
+      A new version of Yomu is ready. Tap to update
+    </button>
   ) : null;
 }
 

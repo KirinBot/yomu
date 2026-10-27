@@ -38,5 +38,6 @@ Live at https://kirinbot.github.io/yomu/ (GitHub Pages, served from the `gh-page
 
 To publish changes: commit to `main`, then run `npm run deploy`. It checks the stories,
 builds, and force-pushes `dist/` to `gh-pages`; the site updates about a minute later.
+Open copies notice the new version when brought to the foreground (`src/lib/update.ts`).
 
 Each device keeps its own progress; use Settings → Export/Import to move it.
