@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview",
-    "check-stories": "node --experimental-strip-types scripts/check-stories.ts"
+    "check-stories": "node --experimental-strip-types scripts/check-stories.ts",
+    "deploy": "sh scripts/deploy.sh"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

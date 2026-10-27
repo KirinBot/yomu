@@ -27,5 +27,9 @@ read-along audio, and a preview → read → summarise → reread loop.
 
 ## Deploying (for phone use)
 
-It's a static site: `npm run build` and host `dist/` anywhere (Netlify, Vercel,
-GitHub Pages). Each device keeps its own progress; use Settings → Export/Import to move it.
+Live at https://kirinbot.github.io/yomu/ (GitHub Pages, served from the `gh-pages` branch).
+
+To publish changes: commit to `main`, then run `npm run deploy`. It checks the stories,
+builds, and force-pushes `dist/` to `gh-pages`; the site updates about a minute later.
+
+Each device keeps its own progress; use Settings → Export/Import to move it.
